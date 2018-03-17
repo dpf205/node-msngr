@@ -1,0 +1,6 @@
+{
+  "name": "node-msngr",
+  "description": "Node.js Node.js MongoDB socket.io messenger/chatbot backend api",
+  "repository": "https://github.com/dpf205/node-msngr",
+  "keywords": ["node", "express", "static"]
+}
