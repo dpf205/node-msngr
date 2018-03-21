@@ -15,14 +15,29 @@ io.on('connection', (socket) => {
     console.log('New user connected');
 
     socket.emit('newMsg', {
-        from: 'dave@example.com',
-        text: 'this a new message from Dave!!',
-        createdAt: new Date()
+        from:'Admin',
+        text: 'Welcome to the chat room',
+        createdAt: new Date().getTime()
     });
 
-    socket.on('createMsg', (createMsg) => {
-        console.log('created on the clientside: ', createMsg);
+    socket.broadcast.emit('newMsg', {
+        from: 'Admin',
+        text: 'New User Joined!',
+        createdAt: new Date().getTime()
     });
+
+    socket.on('createMsg', (message) => {
+        console.log('created on the clientside: ', message);
+        io.emit('newMsg', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        });
+
+
+    });
+
+
 
     socket.on('disconnect', () => {
         console.log('User was disconnected')
