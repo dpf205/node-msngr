@@ -11,14 +11,23 @@ var io = socketIO(server);
 
 app.use(express.static(publicPath));
 
-io.on('connection', (socket) =>{
+io.on('connection', (socket) => {
     console.log('New user connected');
 
-    socket.on('disconnect', ()=>{
-    console.log('User was disconnected')
-});
-});
+    socket.emit('newMsg', {
+        from: 'dave@example.com',
+        text: 'this a new message from Dave!!',
+        createdAt: new Date()
+    });
 
+    socket.on('createMsg', (createMsg) => {
+        console.log('created on the clientside: ', createMsg);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User was disconnected')
+    });
+});
 
 
 server.listen(port, () => {
