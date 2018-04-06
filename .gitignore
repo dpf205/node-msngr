@@ -4,3 +4,4 @@ tsconfig.json
 .DS_Store
 *.env
 .vscode
+playground/
